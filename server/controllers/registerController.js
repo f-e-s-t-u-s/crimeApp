@@ -7,7 +7,7 @@ const { verificationEmail } = require("../emails/verification");
 
 const handleNewUser = async (req, res) => {
   const { username, email, password } = req.body;
-  const verified = false; //todo verify user email
+  const verified = false; 
   // hash passwords
   const hashedPass = await bcrypt.hash(password, 10);
 
@@ -34,7 +34,7 @@ const handleNewUser = async (req, res) => {
 
         console.log(results);
         // todo verify user email
-        //send a unique link to user email, if it matches with one stored in database, mark as confirmed
+        //send a unique link to user email, if it matches with one stored in jwt, mark as confirmed
 
         // get user details
         connection.query(

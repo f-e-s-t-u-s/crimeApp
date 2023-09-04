@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 dotenv.config();
 
+// user login function
 const handleUserLogin = async (req, res) => {
   const { emailOrUsername, password } = req.body;
   try {
@@ -41,7 +42,7 @@ const handleUserLogin = async (req, res) => {
         const refreshToken = jwt.sign(
           { email: user.email_address },
           process.env.REFRESH_TOKEN_SECRET,
-          { expiresIn: "3d" }
+          { expiresIn: "10d" }
         );
           console.log(user.verified);
         // todo check if user email is verified

@@ -8,12 +8,12 @@ const sendEmail = (content, subject, userEmail) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "wschool752@gmail.com",
+        user: "wschool752@gmail.com", //you can chnage to your own and replace pass with your app password
         pass: process.env.MAIL,
       },
     });
 
-    // html contenet
+    // html contenet from emails folder
     const htmlContent = content;
 
     const mailOptions = {
@@ -22,7 +22,7 @@ const sendEmail = (content, subject, userEmail) => {
       subject: subject,
       html: htmlContent,
     };
-
+// send as html
     mailOptions.headers = {
       "Content-Type": "text/html",
     };
