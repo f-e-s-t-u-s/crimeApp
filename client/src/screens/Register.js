@@ -5,27 +5,44 @@ import {
   StyleSheet,
   Button,
   ScrollView,
+  Modal,
+  TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
 import { Formik } from "formik";
 import { registerSchema } from "../validation/inputValidation";
 import { API_URL } from "../services/api";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const Register = () => {
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const navigation = useNavigation();
   const handleSubmit = async (values) => {
     try {
+      setLoading(true);
       const response = await axios.post(`${API_URL}/api/v1/create`, values);
-      console.log(response.data);
+      if (response.status === 201) {
+        setLoading(false);
+        console.log(response.data);
+        setSuccess(response.data.message);
+        setShowModal(true);
+      }
     } catch (error) {
+      setLoading(false);
+
       if (error.response) {
         console.log(error.response.data);
-        setError(error.response.data.message)
+        setError(error.response.data.message);
       } else {
         console.warn(error);
-        setError("Ooops, Failed to contact our servers. Please try again later")
-
+        setError(
+          "Ooops, Failed to contact our servers. Please try again later"
+        );
       }
     }
   };
@@ -43,8 +60,35 @@ const Register = () => {
           </Text>
         </View>
 
+        <Modal animationType="fade" transparent={true} visible={loading}>
+          <View style={register.modal}>
+            <View style={register.modalContainer}>
+              <ActivityIndicator size={"large"} color={"green"} />
+              <Text>Loading.....</Text>
+            </View>
+          </View>
+        </Modal>
+        <Modal animationType="slide" transparent={true} visible={showModal}>
+          <View style={register.modal}>
+            <View style={register.modalContainer}>
+              <Text style={register.successText}>{success}</Text>
+
+              <TouchableOpacity>
+                <Button
+                  onPress={() => {
+                    setShowModal(false);
+                    navigation.navigate("LoginScreen");
+                  }}
+                  style={register.closeButton}
+                  title="Close"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
         <View style={register.form}>
-            <Text style={register.error}  >{ error}</Text>
+          <Text style={register.error}>{error}</Text>
           <Formik
             initialValues={{ username: "", dob: "", email: "", password: "" }}
             validationSchema={registerSchema}
@@ -178,9 +222,31 @@ const register = StyleSheet.create({
   errorMessage: {
     color: "red",
   },
-  error:{
+  error: {
     color: "red",
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 10,
-  }
+  },
+  modal: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContainer: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  successText: {
+    fontSize: 24,
+    color: "green",
+    fontWeight: "bold",
+  },
+  closeButton: {
+    fontSize: 18,
+    color: "green",
+    marginTop: 10,
+  },
 });
