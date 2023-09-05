@@ -50,7 +50,7 @@ const Register = () => {
     <ScrollView>
       <View style={register.container}>
         <View style={register.top}>
-          <Text>red color background</Text>
+          <Text></Text>
         </View>
         <View style={register.create}>
           <Text style={register.createText}>Create an account</Text>

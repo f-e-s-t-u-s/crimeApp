@@ -23,9 +23,9 @@ const handleNewUser = async (req, res) => {
             if (err.sqlMessage.includes(email)) {
               return res
                 .status(409)
-                .json(" An account with this email already exists");
+                .json( {message: "An account with this email already exists"});
             } else if (err.sqlMessage.includes(username)) {
-              return res.status(409).json("Pick a different username");
+              return res.status(409).json({message: "Pick a different username"});
             } else {
               console.log("Error Occurred");
             }
