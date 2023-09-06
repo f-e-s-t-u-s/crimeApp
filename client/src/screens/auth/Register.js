@@ -56,7 +56,7 @@ const Register = () => {
           <Text style={register.createText}>Create an account</Text>
           <Text style={register.createLink}>
             Enter your account details below or{" "}
-            <Text style={register.login}>log in</Text>
+            <Text style={register.login} onPress={() => navigation.navigate('Login')} >log in</Text>
           </Text>
         </View>
 

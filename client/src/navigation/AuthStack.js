@@ -2,16 +2,16 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack'
 
 // screense
-import Register from '../screens/Register';
-import Login from '../screens/Login';
+import Register from '../screens/auth/Register';
+import Login from '../screens/auth//Login';
 
 const AuthStack = createStackNavigator();
 
 const AuthStackNavigator = () =>{
     return(
-        <AuthStack.Navigator initialRouteName='Register' >
-            <AuthStack.Screen  name='RegisterScreen' component={Register} />
-            <AuthStack.Screen name='LoginScreen' component={Login} />
+        <AuthStack.Navigator initialRouteName='Login' >
+            <AuthStack.Screen  name='Register' component={Register} />
+            <AuthStack.Screen name='Login' component={Login} />
         </AuthStack.Navigator>
     )
 }
