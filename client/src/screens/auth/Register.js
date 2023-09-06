@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Formik } from "formik";
-import { registerSchema } from "../validation/inputValidation";
-import { API_URL } from "../services/api";
+import { registerSchema } from "../../validation/inputValidation";
+import { API_URL } from "../../services/api";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
