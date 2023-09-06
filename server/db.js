@@ -7,9 +7,11 @@ dotenv.config();
 const connection = mysql.createConnection({
   // ! use ip address for host
   host: process.env.HOST,
-  user: process.env.USER,
+  // user: process.env.USER,
+  user: "sql11644576",
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
 });
+
 
 module.exports = connection;
