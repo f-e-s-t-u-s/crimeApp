@@ -12,6 +12,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyparser = require("body-parser");
 const { handleRefresh } = require("./routes/refreshToken");
+const { hotlines } = require("./routes/hotlines");
 const app = express();
 app.set("view engine", "ejs");
 
@@ -48,3 +49,6 @@ app.use(changePass)
 app.use(forgotPass)
 app.use(emailLink)
 // app.use(handleRefresh)
+
+// !hotlines
+app.use(hotlines)
