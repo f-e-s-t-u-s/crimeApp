@@ -13,6 +13,7 @@ const cors = require("cors");
 const bodyparser = require("body-parser");
 const { handleRefresh } = require("./routes/refreshToken");
 const { hotlines } = require("./routes/hotlines");
+const { report } = require("./routes/report");
 const app = express();
 app.set("view engine", "ejs");
 
@@ -52,3 +53,6 @@ app.use(emailLink)
 
 // !hotlines
 app.use(hotlines)
+
+// ! reports
+app.use(report)

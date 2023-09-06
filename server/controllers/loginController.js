@@ -29,7 +29,7 @@ const handleUserLogin = async (req, res) => {
           user.password_hash
         );
         if (!passwordCheck) {
-          return res.status(400).json({ message: "Inavlid login details" });
+          return res.status(400).json({ message: "Invalid login details" });
         }
 
         // create jwts
@@ -58,7 +58,7 @@ const handleUserLogin = async (req, res) => {
 
           return res
             .status(200)
-            .json({ accessToken, refreshToken, message: "login sucessful" });
+            .json({ accessToken, refreshToken, message: "Login sucessful" });
         }
       }
     );
