@@ -13,12 +13,13 @@ CREATE TABLE IncidentCategories (
 );
 CREATE TABLE Incidents (
     incident_id int primary key auto_increment,
-    user_id int not null,
-    incident_type varchar(255) not null,
+    user_id int,
+    category_id int not null,
     incident_description TEXT,
     incident_date_time DATETIME not null,
     incident_location varchar(255) not null,
-    foreign key (user_id) references Users(user_id)
+    foreign key (user_id) references Users(user_id),
+    foreign key (category_id) references IncidentCategories(category_id)
 );
 CREATE TABLE RefMedia (
     media_id int not null primary key,
@@ -78,25 +79,24 @@ GVRC’s main pur­pose is to bring back mean­ing to survivor’s lives and the
         116
     );
 INSERT INTO IncidentCategories (category_name)
-VALUES
-  ("Burglary"),
-  ("Alcohol and Substance Abuse"),
-  ("Robbery"),
-  ("Corruption"),
-  ("Assault"),
-  ("Theft"),
-  ("Shoplifting"),
-  ("Vandalism"),
-  ("Car Theft"),
-  ("Drug Offences"),
-  ("Domestic Violence"),
-  ("Homicide"),
-  ("Sexual Assault"),
-  ("Cybercrime"),
-  ("Fraud"),
-  ("Harassment"),
-  ("Child Abuse"),
-  ("Human Trafficking"),
-  ("Hate Crimes"),
-  ("Environmental Crimes"),
-  ("Arson");
+VALUES ("Burglary"),
+    ("Alcohol and Substance Abuse"),
+    ("Robbery"),
+    ("Corruption"),
+    ("Assault"),
+    ("Theft"),
+    ("Shoplifting"),
+    ("Vandalism"),
+    ("Car Theft"),
+    ("Drug Offences"),
+    ("Domestic Violence"),
+    ("Homicide"),
+    ("Sexual Assault"),
+    ("Cybercrime"),
+    ("Fraud"),
+    ("Harassment"),
+    ("Child Abuse"),
+    ("Human Trafficking"),
+    ("Hate Crimes"),
+    ("Environmental Crimes"),
+    ("Arson");
