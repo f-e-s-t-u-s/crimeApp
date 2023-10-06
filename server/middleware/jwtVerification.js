@@ -7,10 +7,10 @@ const jwtVerification = (req, res, next) => {
 
   // if no auth headers
   if (!authHeaders) {
-    return res.json({ message: "Unauthorised" }).sendStatus(401);
+    return res.status(401).json({ message: "Unauthorised" })
   }
 
-  console.log(authHeaders);
+  // console.log(authHeaders);
 
   // spilt the bearer with tokem
   const token = authHeaders.split(" ")[1];
@@ -19,9 +19,10 @@ const jwtVerification = (req, res, next) => {
   // takes, token, acces_token, callback
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, decoded) => {
     if (error) {
-      return res.sendStatus(403);
+      return res.status(403).json({auth: false, message: "Invalid auth token"});
     }
-    req.user = decoded.email;
+    req.email = decoded.email;
+    req.user_id = decoded.user;
     next();
   });
 };

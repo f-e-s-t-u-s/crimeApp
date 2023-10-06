@@ -1,18 +1,18 @@
 CREATE TABLE Users (
-    user_id int primary key auto_increment,
+    user_id int primary key AUTO_INCREMENT,
     username varchar(255) not null UNIQUE,
     email varchar(255) not null UNIQUE,
     password_hash varchar(255),
-    verified BOOLEAN not null,
+    verified BIT not null,
     profile_pic VARCHAR(255),
-    isAnonymous BOOLEAN NOT NULL DEFAULT FALSE
+    isAnonymous BIT NOT NULL DEFAULT 0
 );
 CREATE TABLE IncidentCategories (
-    category_id int primary key auto_increment,
+    category_id int primary key AUTO_INCREMENT,
     category_name varchar(255) not null
 );
 CREATE TABLE Incidents (
-    incident_id int primary key auto_increment,
+    incident_id int primary key AUTO_INCREMENT,
     user_id int,
     category_id int not null,
     incident_description TEXT,
@@ -22,14 +22,15 @@ CREATE TABLE Incidents (
     foreign key (category_id) references IncidentCategories(category_id)
 );
 CREATE TABLE RefMedia (
-    media_id int not null primary key,
+    media_id int not null primary key AUTO_INCREMENT,
     incident_id int not null,
     media_type varchar(255),
-    media_url varchar(255),
+    media_url TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     foreign key (incident_id) references Incidents(incident_id)
 );
 CREATE TABLE Hotlines (
-    hotline_id INT auto_increment primary key,
+    hotline_id INT AUTO_INCREMENT primary key,
     hotline_name varchar(255) not null,
     hotline_description TEXT,
     hotline_contact varchar(255) not null

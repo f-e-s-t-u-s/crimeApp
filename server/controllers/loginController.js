@@ -34,13 +34,13 @@ const handleUserLogin = async (req, res) => {
 
         // create jwts
         const accessToken = jwt.sign(
-          { email: user.email },
+          { email: user.email, user: user.user_id },
           process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: "1m" }
+          { expiresIn: "30m" }
         );
 
         const refreshToken = jwt.sign(
-          { email: user.email_address },
+          { email: user.email_address, user: user.user_id },
           process.env.REFRESH_TOKEN_SECRET,
           { expiresIn: "10d" }
         );

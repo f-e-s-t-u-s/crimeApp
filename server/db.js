@@ -1,17 +1,16 @@
-// Connection file to the mysql database
-const mysql = require("mysql");
-const dotenv = require('dotenv')
+// Connection file to the sql database
+const sql = require("mysql");
+const dotenv = require("dotenv");
 dotenv.config();
 
 // sql database connection
-const connection = mysql.createConnection({
-  // ! use ip address for host
-  host: process.env.HOST,
-  // user: process.env.USER,
-  user: "sql11644576",
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
+
+const connection = sql.createConnection({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT,
+  
 });
-
-
 module.exports = connection;
