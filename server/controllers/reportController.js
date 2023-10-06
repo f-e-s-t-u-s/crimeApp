@@ -4,7 +4,6 @@ const connection = require("../db");
 const handleNewCrime = (req, res) => {
   const email = req.email;
   const user_id = req.user_id;
-  console.log(email, user_id);
 
   const {
     category_id,

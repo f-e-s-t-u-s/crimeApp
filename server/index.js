@@ -43,7 +43,7 @@ app.use(create);
 app.use(verify);
 app.use(login);
 // routes below need jwt verification to access
-app.use(jwtVerification)
+// app.use(jwtVerification)
 app.use(changePass);
 app.use(forgotPass);
 app.use(emailLink);
