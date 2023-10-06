@@ -14,7 +14,7 @@ const Hotlines = () => {
       setLoading(true)
       try {
         const response = await axios.get(`${API_URL}/api/v1/hotlines`);
-        console.log(response.data);
+        // console.log(response.data);
         setHotlines(response.data);
         setLoading(false)
       } catch (error) {
