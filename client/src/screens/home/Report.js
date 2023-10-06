@@ -204,7 +204,6 @@
 //   );
 // }
 
-
 // // stylesheet for report new incident
 //  const report = StyleSheet.create({
 //   header: {
@@ -266,15 +265,100 @@
 //   },
 // });
 
-import { View, Text } from 'react-native'
-import React from 'react'
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
+import { reportSchema } from "../../validation/inputValidation";
+import { Formik } from "formik";
 
 const Report = () => {
-  return (
-    <View>
-      <Text>Report</Text>
-    </View>
-  )
-}
+  const [errorData, setErrorData] = useState("");
 
-export default Report
+  const handleSubmit = (values) => {
+    console.log("Form Values:", values);
+  };
+
+  return (
+    <View className="p-8" style={report.header}>
+      <Text className="text-2xl font-black" style={report.seen}>
+        Seen a crime? Report Now!
+      </Text>
+      <Text style={report.errorData}>{errorData}</Text>
+      <Formik
+        initialValues={{
+          incident_description: "",
+          incident_date_time: "",
+          incident_location: "",
+        }}
+        validationSchema={reportSchema}
+        onSubmit={handleSubmit}
+      >
+        {(props) => (
+          <View style={report.form}>
+            <View>
+              <View>
+                <Text style={report.personal}>Incident Description</Text>
+                <ScrollView
+                  style={report.TextInputCont}
+                  contentContainerStyle={report.TextInputContent}
+                  keyboardShouldPersistTaps="handled"
+                  className="border border-sky-500 padding-2 rounded-md"
+                >
+                  <TextInput
+                    style={report.commonInput}
+                    placeholder="Incident Description"
+                    value={props.values.incident_description}
+                    numberOfLines={10}
+                    multiline
+                    onChangeText={props.handleChange("incident_description")}
+                    onBlur={props.handleBlur("incident_description")}
+                  />
+                </ScrollView>
+                <Text style={report.errorMessage}>
+                  {props.touched.incident_description &&
+                    props.errors.incident_description}
+                </Text>
+                <TextInput
+                  className="border border-sky-500 rounded-md mt-5 p-2"
+                  style={report.commonInput}
+                  placeholder="When did the incident occur?"
+                  value={props.values.incident_date_time}
+                  onChangeText={props.handleChange("incident_date_time")}
+                  onBlur={props.handleBlur("incident_date_time")}
+                />
+                <Text style={report.errorMessage}>
+                  {props.touched.incident_date_time &&
+                    props.errors.incident_date_time}
+                </Text>
+                <TextInput
+                  className="border border-sky-500 rounded-md p-2 mt-5"
+                  style={report.commonInput}
+                  placeholder="Where did the incident occur?"
+                  value={props.values.incident_location}
+                  onChangeText={props.handleChange("incident_location")}
+                  onBlur={props.handleBlur("incident_location")}
+                />
+                <Text style={report.errorMessage}>
+                  {props.touched.incident_location &&
+                    props.errors.incident_location}
+                </Text>
+              </View>
+
+              <Button title="Submit Report" onPress={props.handleSubmit} />
+            </View>
+          </View>
+        )}
+      </Formik>
+    </View>
+  );
+};
+
+const report = StyleSheet.create({});
+
+export default Report;
